@@ -18,6 +18,7 @@ Created by Sebastian Bullinger
 '''
 
 import numpy as np
+from tqdm import tqdm
 from photogrammetry_importer.ext.plyfile import PlyData, PlyElement
 from photogrammetry_importer.types.point import Point
 
@@ -43,7 +44,7 @@ class PLYFileHandler:
         #logger.info(scalar_value_keys)
 
         print('Found ' + str(len(ply_data['vertex'].data)) + ' vertices')
-        for point_index, line in enumerate(ply_data['vertex'].data):
+        for point_index, line in tqdm(enumerate(ply_data['vertex'].data)):
             coord = np.array([line['x'], line['y'], line['z']])
             if use_color:
                 color = np.array([line['red'], line['green'], line['blue']])
